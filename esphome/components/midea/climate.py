@@ -112,6 +112,7 @@ CONFIG_SCHEMA = cv.All(
                 remote_transmitter.RemoteTransmitterComponent
             ),
             cv.Optional(CONF_BEEPER, default=False): cv.boolean,
+            cv.Optional(CONF_USE_FAHRENHEIT, default=False): cv.boolean,
             cv.Optional(CONF_AUTOCONF, default=True): cv.boolean,
             cv.Optional(CONF_DISPLAY_CONTROL, default="AUTO"): validate_display_control,
             cv.Optional(CONF_SUPPORTED_MODES): cv.ensure_list(validate_modes),
@@ -217,6 +218,7 @@ async def to_code(config):
         cg.add_define("USE_REMOTE_TRANSMITTER")
         await cg.add_variable(var.set_transmitter, config[CONF_TRANSMITTER_ID])
     cg.add(var.set_beeper_feedback(config[CONF_BEEPER]))
+    cg.add(var.set_use_fahrenheit(config[CONF_USE_FAHRENHEIT]))
     cg.add(var.set_autoconf(config[CONF_AUTOCONF]))
     cg.add(var.set_display_control(config[CONF_DISPLAY_CONTROL]))
     cg.add_optional(var.set_supported_modes, config.get(CONF_SUPPORTED_MODES))
