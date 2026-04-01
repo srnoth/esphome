@@ -403,6 +403,7 @@ void ToshibaClimate::setup() {
   // Set supported modes & temperatures based on model
   this->minimum_temperature_ = this->temperature_min_();
   this->maximum_temperature_ = this->temperature_max_();
+  ESP_LOGD(TAG, "temperature_min_() = %.10f", this->minimum_temperature_);
   this->swing_modes_ = this->toshiba_swing_modes_();
 
   // Ensure swing mode is always initialized to a valid value
