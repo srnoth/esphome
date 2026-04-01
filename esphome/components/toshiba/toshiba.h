@@ -32,6 +32,7 @@ class ToshibaClimate : public climate_ir::ClimateIR {
                                climate::CLIMATE_FAN_HIGH, climate::CLIMATE_FAN_QUIET}) {}
 
   void setup() override;
+  void dump_config() override;
   void set_model(Model model) { this->model_ = model; }
 
  protected:
