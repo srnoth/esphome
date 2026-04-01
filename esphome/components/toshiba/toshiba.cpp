@@ -401,7 +401,12 @@ void ToshibaClimate::setup() {
     this->swing_mode = climate::CLIMATE_SWING_OFF;
   }
   // Set supported modes & temperatures based on model
-  this->minimum_temperature_ = this->temperature_min_();
+  float raw_conv = (TOSHIBA_RAC_PT1411HWRU_TEMP_F_MIN - 32.0f) * 5.0f / 9.0f;
+  float stepped = std::nextafterf(raw_conv, 0.0f);
+  float temp_min = this->temperature_min_();
+  ESP_LOGD(TAG, "DEBUG model_=%d, raw_conv=%.10f, nextafterf=%.10f, temperature_min_()=%.10f",
+           (int) this->model_, raw_conv, stepped, temp_min);
+  this->minimum_temperature_ = temp_min;
   this->maximum_temperature_ = this->temperature_max_();
   this->swing_modes_ = this->toshiba_swing_modes_();
 
