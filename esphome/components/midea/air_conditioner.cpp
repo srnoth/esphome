@@ -6,6 +6,7 @@
 #include "ac_adapter.h"
 #include <cmath>
 #include <cstdint>
+#include <cstring>
 
 namespace esphome::midea::ac {
 
